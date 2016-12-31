@@ -1,0 +1,10 @@
+#html_doc = urllib2.urlopen("https://fantasy.premierleague.com/drf/bootstrap-static").read()
+#print(html_doc[1])
+
+When u make a HTTP Request, if we read it using urllib
+It treats the response as a String
+Hence despite the format was in JSON, Errors like 
+1. TypeError: string indices must be integers, not str
+2. AttributeError str-object-has-no-attribute
+
+Hence use other library that treats Request - Response as Json 
