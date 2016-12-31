@@ -23,3 +23,11 @@ Hence despite the format was in JSON, Errors like
 2. AttributeError str-object-has-no-attribute
 
 Hence use other library that treats Request - Response as Json 
+
+
+names.append(full_name.str())
+AttributeError: 'unicode' object has no attribute 'str'
+
+Solution - str(full_name)
+
+
