@@ -42,3 +42,26 @@ Entire data available on EPL, FPL website
 2. User data
 User's data of Players Selected, Removed, Replaced(Transferred), Considered, Benched, etc
 
+FPL Manager data - 
+main_user_id,
+main_user_name,
+main_user_region,main_user_region_id,
+main_user_team_name ,
+main_user_started_event,
+main_user_favourite_team,
+
+
+Changing - 
+main_user_overall_points,
+main_user_overall_rank ,
+main_user_bank_value,
+main_user_balance ,
+main_user_total_transfers
+
+Analysis - User-id based
+1. Countries (region wise)
+2. Clustering based on Team-names
+3. Started event
+4. Favourite team
+
+Country vs Team favourite
