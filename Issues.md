@@ -5,13 +5,14 @@ While checking the source of any webpage - Directly Inspect element of Value vis
 
 Thanks to http://www.gregreda.com/2015/02/15/web-scraping-finding-the-api/
 
-Realization 
+- Realization 
+.
 1. User(Client) Requests using Browser
 2. Reaches the Server
 3. Data can be fetched and injected into the Template and send as a Response back to the Client
-i.e. Server side Page creation
-OR
-Client side Web App - 
+	i.e. Server side Page creation
+	OR
+	Client side Web App - 
 4. Server sends the Static content HTML page
 but Data -  Javascript in the server response fetches the data from an API and uses it to create the page client-side
 
@@ -126,7 +127,8 @@ Traceback (most recent call last):
 ValueError: No JSON object could be decoded
 ```
 
-Solution - Handle the exception (basically bad request)
+ - Solution - 
+ Handle the exception (basically bad request)
 
 
 Issue #9
@@ -170,7 +172,8 @@ File "user.py", line 36, in <module>
 ```
 dnf install mongodb mongodb-server
 ```
-Installed:
+
+- Installed:
 ```
   boost-program-options.x86_64 1.60.0-10.fc25                                   
   boost-regex.x86_64 1.60.0-10.fc25                                             
@@ -219,7 +222,7 @@ Error: package mongodb-org-tools-3.2.0-1.el7.x86_64 conflicts with mongodb-serve
 (try to add '--allowerasing' to command line to replace conflicting packages)
 ```
 
-Solution
+- Solution
 ```
 dnf install mongo-tools
 ```
@@ -239,7 +242,7 @@ db.fpl_user_data.find().pretty()
 Issue #11
 =========
 
-Problem - 
+- Problem - 
  ```
  db.fpl_user_data.find().sort({KEY:1})
 Error: error: {
@@ -250,7 +253,7 @@ Error: error: {
 }
 ```
 
-Solution    
+- Solution    
 http://pe-kay.blogspot.in/2016/05/how-to-change-mongodbs-sort-buffer-size.html
 
 ```
@@ -271,9 +274,9 @@ Error: error: {
 }
 ```
 
-Issue - Output was not coming in sorted fashion
+- Issue - Output was not coming in sorted fashion
 
-Solution
+- Solution
 ```
 db.collection_name.find().sort({key:1}).pretty()
 
@@ -282,44 +285,52 @@ db.fpl_user_data.find().sort( { main_user_id: 1 } ).pretty()
 
 Issue #13
 =========
-Problem - Accesing MongoDB using Python
+- Problem - Accesing MongoDB using Python
+
 https://docs.mongodb.com/getting-started/python/client/
 https://docs.mongodb.com/getting-started/python/query/
 
 Issue #14
 =========
-Aggregation
+- Aggregation
+
 https://docs.mongodb.com/getting-started/python/aggregation/
 
 Issue #15
 =========
 
-Data inconsistency
-1.Incomplete
-count - 193212
-last elemet id 198181
+- Data inconsistency
 
-2.empty data fields (ASCII Unicode)
-first name last name
-main user team name
+1.
+Incomplete
+
+- count - 193212
+- last elemet id 198181
+
+2.
+empty data fields (ASCII Unicode)
+
+- first name last name
+- main user team name
 
 3.duplicate data
-Solution
+
+- Solution
 ```
 >db.collection-name.remove({'key':'value'})
 ```
-key = attribute name / field / column name
-value = corresponding value
+
+- key = attribute name / field / column name
+- value = corresponding value
 
 Issue #16
 =========
-Trying to Improve the Speed / Rate of Requests from 1 request per second to 10 or more
-Tried
-Python libraries
+- Trying to Improve the Speed / Rate of Requests from 1 request per second to 10 or more
+- Tried Python libraries
 1. Twisted
 2. Grequests 
 
-Grequest is better but gave following errors
+- Grequest is better but gave following errors
 1.
 ```
 ('Connection aborted.', error(22, 'Invalid argument'))
