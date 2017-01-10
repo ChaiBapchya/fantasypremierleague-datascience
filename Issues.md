@@ -165,7 +165,7 @@ File "user.py", line 36, in <module>
 
 
 
-``````Steps for Mongo Installation, Setup, Start, Use
+#Steps for Mongo Installation, Setup, Start, Use
 1. 
 ```
 dnf install mongodb mongodb-server
