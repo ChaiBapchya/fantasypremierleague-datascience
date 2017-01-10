@@ -4,20 +4,22 @@ Issue #1
 While checking the source of any webpage - Directly Inspect element of Value visible on Webpage isnt always helpful
 
 Thanks to http://www.gregreda.com/2015/02/15/web-scraping-finding-the-api/
+
 Realization 
-User(Client) Requests using Browser
-Reaches the Server
-Data can be fetched and injected into the Template and send as a Response back to the Client
+1. User(Client) Requests using Browser
+2. Reaches the Server
+3. Data can be fetched and injected into the Template and send as a Response back to the Client
 i.e. Server side Page creation
 OR
 Client side Web App - 
-Server sends the Static content HTML page
+4. Server sends the Static content HTML page
 but Data -  Javascript in the server response fetches the data from an API and uses it to create the page client-side
 
 To get such data - Developer tools - Network - XHR (instead of normal HTML )
-
+```
 #html_doc = urllib2.urlopen("https://fantasy.premierleague.com/drf/bootstrap-static").read()
 #print(html_doc[1])
+```
 
 When u make a HTTP Request, if we read it using urllib
 It treats the response as a String
@@ -29,34 +31,44 @@ Hence use other library that treats Request - Response as Json
 
 Issue #2
 ========
-
+```
 names.append(full_name.str())
 AttributeError: 'unicode' object has no attribute 'str'
-
-Solution - str(full_name)
+```
+Solution - 
+```str(full_name)
+```
 
 Issue #3
 ========
-
-    names.append(str(full_name))
+```
+names.append(str(full_name))
 UnicodeEncodeError: 'ascii' codec can't encode character u'\xe9' in position 1: ordinal not in range(128)
-
+```
 Solution
+```
 s = full_name.encode('ascii', 'ignore').decode('ascii')
-
+```
 Disadv - removes all other internationalizations
 
+
+Issue #4
+========
 ', u'ElliotEmbleton', u'DeclanRice']
 To get rid of u'
 Convert Unicode string to normal ascii string
 str(variable)
 
+Issue #5
+========
   response = requests.get("https://fantasy.premierleague.com/drf/entry/"+main_user_id+"/event/"+gameweek+"/picks")
 TypeError: cannot concatenate 'str' and 'int' objects
 
 Solution
 str(main_user_id)
 
+Issue #6
+========
  if player["is_captain"]==true:
 NameError: name 'true' is not defined
   if player["is_captain"]===true:                             ^
@@ -64,6 +76,8 @@ SyntaxError: invalid syntax
 Solution
 if player["is_captain"]:
 
+Issue #7
+========
 TypeError: 'NoneType' object has no attribute '__getitem__'
 At times some data depends on User Login - Such data is not returned in JSON response as visible in Postman or HTTP request's corr. response
 
@@ -81,7 +95,9 @@ Here actual Sessions, parameters, tokens were passed
 
 
 
-
+Issue #8
+========
+```
 Traceback (most recent call last):
   File "user.py", line 23, in <module>
     json_data = json.loads(response.text)
@@ -92,10 +108,14 @@ Traceback (most recent call last):
   File "/usr/lib64/python2.7/json/decoder.py", line 382, in raw_decode
     raise ValueError("No JSON object could be decoded")
 ValueError: No JSON object could be decoded
+```
 
 Solution - Handle the exception (basically bad request)
 
 
+Issue #9
+========
+```
 File "user.py", line 36, in <module>
     response = requests.get("https://fantasy.premierleague.com/drf/entry/"+str(counter))
   File "/usr/lib/python2.7/site-packages/requests/api.py", line 71, in get
@@ -124,11 +144,12 @@ File "user.py", line 36, in <module>
     return self.read(buflen)
   File "/usr/lib64/python2.7/ssl.py", line 643, in read
     v = self._sslobj.read(len)
-    
+    `` 
+```
 
 
 
-
+``````Steps for Mongo Installation, Setup, Start, Use
 1. dnf install mongodb mongodb-server
 Installed:
   boost-program-options.x86_64 1.60.0-10.fc25                                   
@@ -156,6 +177,8 @@ fpl_user_data
 
 
 
+Issue #10
+=========
 mongoimport -d fpl_users -c fpl_user_data --type csv --file data.csv --headerline
 bash: mongoimport: command not found...
 Packages providing this file are:
@@ -181,6 +204,10 @@ All CSV files imported similarly
 
 db.fpl_user_data.find().pretty()
 
+
+Issue #11
+=========
+
 Problem - 
  db.fpl_user_data.find().sort({KEY:1})
 Error: error: {
@@ -198,6 +225,8 @@ db.adminCommand({"setParameter":1,"internalQueryExecMaxBlockingSortBytes":134217
 > db.fpl_user_data.find().sort({KEY:1})
 
 
+Issue #12
+=========
 db.fpl_user_data.find().sort({KEY:"main_user_id"})
 Error: error: {
 	"waitedMS" : NumberLong(0),
@@ -215,17 +244,25 @@ db.collection_name.find().sort({key:1}).pretty()
 db.fpl_user_data.find().sort( { main_user_id: 1 } ).pretty()
 
 
+Issue #13
+=========
 Problem - Accesing MongoDB using Python
 https://docs.mongodb.com/getting-started/python/client/
 https://docs.mongodb.com/getting-started/python/query/
 
+Issue #14
+=========
 Aggregation
 https://docs.mongodb.com/getting-started/python/aggregation/
+
+Issue #15
+=========
 
 Data inconsistency
 1.Incomplete
 count - 193212
 last elemet id 198181
+
 2.empty data fields (ASCII Unicode)
 first name last name
 main user team name
@@ -236,8 +273,15 @@ Solution
 key = attribute name / field / column name
 value = corresponding value
 
+Issue #16
+=========
+Trying to Improve the Speed / Rate of Requests from 1 request per second to 10 or more
+Tried
+Python libraries
+1. Twisted
+2. Grequests 
 
-errors
+Grequest is better but gave following errors
 1.
 ('Connection aborted.', error(22, 'Invalid argument'))
 2.
