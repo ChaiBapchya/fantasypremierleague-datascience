@@ -36,7 +36,8 @@ names.append(full_name.str())
 AttributeError: 'unicode' object has no attribute 'str'
 ```
 Solution - 
-```str(full_name)
+```
+str(full_name)
 ```
 
 Issue #3
@@ -54,31 +55,46 @@ Disadv - removes all other internationalizations
 
 Issue #4
 ========
+
+```
 ', u'ElliotEmbleton', u'DeclanRice']
+```
 To get rid of u'
 Convert Unicode string to normal ascii string
+```
 str(variable)
+```
 
 Issue #5
 ========
-  response = requests.get("https://fantasy.premierleague.com/drf/entry/"+main_user_id+"/event/"+gameweek+"/picks")
+```
+response = requests.get("https://fantasy.premierleague.com/drf/entry/"+main_user_id+"/event/"+gameweek+"/picks")
 TypeError: cannot concatenate 'str' and 'int' objects
-
+```
 Solution
+```
 str(main_user_id)
+```
 
 Issue #6
 ========
- if player["is_captain"]==true:
+```
+if player["is_captain"]==true:
 NameError: name 'true' is not defined
   if player["is_captain"]===true:                             ^
 SyntaxError: invalid syntax
+```
+
 Solution
+```
 if player["is_captain"]:
+```
 
 Issue #7
 ========
+```
 TypeError: 'NoneType' object has no attribute '__getitem__'
+```
 At times some data depends on User Login - Such data is not returned in JSON response as visible in Postman or HTTP request's corr. response
 
 However visible in Browser->Network->XHR->response part
@@ -87,9 +103,9 @@ for e.g.
 For - https://fantasy.premierleague.com/a/team/3146257/event/19
 
 Actual URL was
-
+```
 curl 'https://fantasy.premierleague.com/drf/bootstrap-dynamic' -H 'Host: fantasy.premierleague.com' -H 'User-Agent: Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:50.0) Gecko/20100101 Firefox/50.0' -H 'Accept: */*' -H 'Accept-Language: en-US,en;q=0.5' --compressed -H 'X-Requested-With: XMLHttpRequest' -H 'Referer: https://fantasy.premierleague.com/a/team/3146257/event/19' -H 'Cookie: _ga=GA1.2.309538033.1473872047; __gads=ID=1e26f8a1f937797f:T=1476526048:S=ALNI_MYwwjDM8utxJfBY-D7A1smdFhSnIA; csrftoken=GcIusuHLJOCxMHiZ1wbI8IsqkcybWq2t; _ga=GA1.3.309538033.1473872047; pl_profile="eyJzIjogIld6SXNNemc1TkRjME5GMDoxY05MRlY6TFE0aE0yWTI4WFhOaTdqeW04c1lqdXU2Nk4wIiwgInUiOiB7ImxuIjogIkJhcGF0IiwgImZjIjogOCwgImlkIjogMzg5NDc0NCwgImZuIjogIkNoYWl0YW55YSJ9fQ=="; sessionid=".eJyrVkpPzE2NT85PSVWyUirISSvIUdJRik8sLcmILy1OLYpPSkzOTs1LAUsmVqYW6UEFivUCwHwnqDyKpkyg-mhDHWMLSxNzE5PYWgBVoiN7:1cNcq5:gyTfZ4HaGrHPDIPnYJh0O6NGLKs"; _gat=1; _dc_gtm_UA-33785302-1=1' -H 'Connection: keep-alive'
-
+```
 Here actual Sessions, parameters, tokens were passed
 
 
@@ -150,17 +166,25 @@ File "user.py", line 36, in <module>
 
 
 ``````Steps for Mongo Installation, Setup, Start, Use
-1. dnf install mongodb mongodb-server
+1. 
+```
+dnf install mongodb mongodb-server
+```
 Installed:
+```
   boost-program-options.x86_64 1.60.0-10.fc25                                   
   boost-regex.x86_64 1.60.0-10.fc25                                             
   mongodb.x86_64 3.2.8-2.fc25                                                   
   mongodb-server.x86_64 3.2.8-2.fc25                                            
   mozjs38.x86_64 38.8.0-2.fc25                                                  
   yaml-cpp.x86_64 0.5.1-13.fc24     
-  
-2.systemctl start mongod
+```  
+2.
+```
+systemctl start mongod
+```
 3.
+```
 [root@chai chai]# mongo
 MongoDB shell version: 3.2.8
 connecting to: test
@@ -174,41 +198,49 @@ fpl_users
 
 show collections
 fpl_user_data
-
+```
 
 
 Issue #10
 =========
+```
 mongoimport -d fpl_users -c fpl_user_data --type csv --file data.csv --headerline
 bash: mongoimport: command not found...
 Packages providing this file are:
 'mongodb-org-tools'
 'mongo-tools'
+```
 
+```
 dnf install mongodb-org-tools
 Failed to synchronize cache for repo 'dockerrepo', disabling.
 Last metadata expiration check: 0:27:04 ago on Thu Jan  5 11:01:05 2017.
 Error: package mongodb-org-tools-3.2.0-1.el7.x86_64 conflicts with mongodb-server provided by mongodb-server-3.2.8-2.fc25.x86_64
 (try to add '--allowerasing' to command line to replace conflicting packages)
+```
 
 Solution
+```
 dnf install mongo-tools
+```
 
 Absolute path - data.csv
+```
 mongoimport -d fpl_users -c fpl_user_data --type csv --file data.csv --headerline
 2017-01-05T11:54:03.753+0530	connected to: localhost
 2017-01-05T11:54:04.338+0530	imported 19214 documents
-
+```
 All CSV files imported similarly
 
-
+```
 db.fpl_user_data.find().pretty()
-
+```
 
 Issue #11
 =========
 
 Problem - 
+ ```
  db.fpl_user_data.find().sort({KEY:1})
 Error: error: {
 	"waitedMS" : NumberLong(0),
@@ -216,17 +248,20 @@ Error: error: {
 	"errmsg" : "Executor error during find command: OperationFailed: Sort operation used more than the maximum 33554432 bytes of RAM. Add an index, or specify a smaller limit.",
 	"code" : 96
 }
+```
 
 Solution    
 http://pe-kay.blogspot.in/2016/05/how-to-change-mongodbs-sort-buffer-size.html
 
+```
 db.adminCommand({"setParameter":1,"internalQueryExecMaxBlockingSortBytes":134217728})
 { "was" : 33554432, "ok" : 1 }
 > db.fpl_user_data.find().sort({KEY:1})
-
+```
 
 Issue #12
 =========
+```
 db.fpl_user_data.find().sort({KEY:"main_user_id"})
 Error: error: {
 	"waitedMS" : NumberLong(0),
@@ -234,15 +269,16 @@ Error: error: {
 	"errmsg" : "bad sort specification",
 	"code" : 2
 }
-
+```
 
 Issue - Output was not coming in sorted fashion
 
 Solution
+```
 db.collection_name.find().sort({key:1}).pretty()
 
 db.fpl_user_data.find().sort( { main_user_id: 1 } ).pretty()
-
+```
 
 Issue #13
 =========
@@ -269,7 +305,9 @@ main user team name
 
 3.duplicate data
 Solution
+```
 >db.collection-name.remove({'key':'value'})
+```
 key = attribute name / field / column name
 value = corresponding value
 
@@ -283,9 +321,14 @@ Python libraries
 
 Grequest is better but gave following errors
 1.
+```
 ('Connection aborted.', error(22, 'Invalid argument'))
+```
 2.
+```
 HTTPSConnectionPool(host='fantasy.premierleague.com', port=443): Max retries exceeded with url: /drf/entry/2365060 (Caused by NewConnectionError('<requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f9b6dcf1e50>: Failed to establish a new connection: [Errno 110] Connection timed out',))
-
+```
 3.
+```
 No JSON object could be decoded
+```
