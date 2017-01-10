@@ -1,3 +1,6 @@
+Issue #1
+========
+
 While checking the source of any webpage - Directly Inspect element of Value visible on Webpage isnt always helpful
 
 Thanks to http://www.gregreda.com/2015/02/15/web-scraping-finding-the-api/
@@ -24,12 +27,16 @@ Hence despite the format was in JSON, Errors like
 
 Hence use other library that treats Request - Response as Json 
 
+Issue #2
+========
 
 names.append(full_name.str())
 AttributeError: 'unicode' object has no attribute 'str'
 
 Solution - str(full_name)
 
+Issue #3
+========
 
     names.append(str(full_name))
 UnicodeEncodeError: 'ascii' codec can't encode character u'\xe9' in position 1: ordinal not in range(128)
