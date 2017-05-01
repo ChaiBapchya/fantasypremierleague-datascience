@@ -5,7 +5,7 @@ import requests
 import time
 
 gameweek=1
-filepath = 'player_data_787665_gw'+str(gameweek)+'.csv'
+filepath = 'player_data_gw_1_'+str(gameweek)+'.csv'
 writer=csv.writer(open(filepath,'wb'))
 header=['main_user_id','main_user_gameweek_points','main_user_total_points_till_gw','main_user_gameweek_rank','main_user_rank_till_gw','gw_team','gw_captain','gw_vice_captain','triple_captain']
 writer.writerow(header)
@@ -17,7 +17,7 @@ writer.writerow(header)
 
 player_data_per_gw=[]
 row1=[]
-for main_user_id in range(787665,4546257):
+for main_user_id in range(1,4546257):
 	response=''
 	while response == '':
 		try:
