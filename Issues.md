@@ -29,7 +29,7 @@ Hence despite the format was in JSON, Errors like
 
 Hence use other library that treats Request - Response as Json 
 
-# 1. Attribute error
+# 2. Attribute error
 ```
 names.append(full_name.str())
 AttributeError: 'unicode' object has no attribute 'str'
@@ -155,8 +155,7 @@ File "user.py", line 36, in <module>
     `` 
 ```
 
-10. Connection Error
-====================
+# 10. Connection Error
 ```
 Traceback (most recent call last):
 File "gw_player_python.py", line 20, in <module>
@@ -196,45 +195,7 @@ response=''
 
 ```
 
-# Steps for Mongo Installation, Setup, Start, Use
-1. 
-```
-dnf install mongodb mongodb-server
-```
-
-- Installed:
-```
-  boost-program-options.x86_64 1.60.0-10.fc25                                   
-  boost-regex.x86_64 1.60.0-10.fc25                                             
-  mongodb.x86_64 3.2.8-2.fc25                                                   
-  mongodb-server.x86_64 3.2.8-2.fc25                                            
-  mozjs38.x86_64 38.8.0-2.fc25                                                  
-  yaml-cpp.x86_64 0.5.1-13.fc24     
-```  
-2.
-```
-systemctl start mongod
-```
-3.
-```
-[root@chai chai]# mongo
-MongoDB shell version: 3.2.8
-connecting to: test
-  
-use fpl_users;
-switched to db fpl_users
-> db
-fpl_users
-> db.createCollection("fpl_user_data");
-{ "ok" : 1 }
-
-show collections
-fpl_user_data
-```
-
-
-11. Package error
-=================
+# 11. Package error
 ```
 mongoimport -d fpl_users -c fpl_user_data --type csv --file data.csv --headerline
 bash: mongoimport: command not found...
@@ -256,20 +217,7 @@ Error: package mongodb-org-tools-3.2.0-1.el7.x86_64 conflicts with mongodb-serve
 dnf install mongo-tools
 ```
 
-Absolute path - data.csv
-```
-mongoimport -d fpl_users -c fpl_user_data --type csv --file data.csv --headerline
-2017-01-05T11:54:03.753+0530	connected to: localhost
-2017-01-05T11:54:04.338+0530	imported 19214 documents
-```
-All CSV files imported similarly
-
-```
-db.fpl_user_data.find().pretty()
-```
-
-12. Operation failed
-====================
+# 12. Operation failed
 
 - Problem - 
  ```
@@ -291,8 +239,7 @@ db.adminCommand({"setParameter":1,"internalQueryExecMaxBlockingSortBytes":134217
 > db.fpl_user_data.find().sort({KEY:1})
 ```
 
-Issue #14
-=========
+# 13. Unsorted output
 ```
 db.fpl_user_data.find().sort({KEY:"main_user_id"})
 Error: error: {
@@ -312,37 +259,30 @@ db.collection_name.find().sort({key:1}).pretty()
 db.fpl_user_data.find().sort( { main_user_id: 1 } ).pretty()
 ```
 
-Issue #15
-=========
+# 14. Access Mongo using Python
+
 - Problem - Accesing MongoDB using Python
 
 https://docs.mongodb.com/getting-started/python/client/
 https://docs.mongodb.com/getting-started/python/query/
 
-Issue #16
-=========
-- Aggregation
+# 15. Aggregation
 
 https://docs.mongodb.com/getting-started/python/aggregation/
 
-Issue #17
-=========
+# 16. Data inconsistency
 
-- Data inconsistency
-
-1.
-Incomplete
+1. Incomplete
 
 - count - 193212
 - last elemet id 198181
 
-2.
-empty data fields (ASCII Unicode)
+2. empty data fields (ASCII Unicode)
 
 - first name last name
 - main user team name
 
-3.duplicate data
+3. duplicate data
 
 - Solution
 ```
@@ -352,23 +292,23 @@ empty data fields (ASCII Unicode)
 - key = attribute name / field / column name
 - value = corresponding value
 
-Issue #18
-=========
+# 17. Performance Increase
+
 - Trying to Improve the Speed / Rate of Requests from 1 request per second to 10 or more
 - Tried Python libraries
 1. Twisted
 2. Grequests 
 
 - Grequest is better but gave following errors
-1.
+1. 
 ```
 ('Connection aborted.', error(22, 'Invalid argument'))
 ```
-2.
+2. 
 ```
 HTTPSConnectionPool(host='fantasy.premierleague.com', port=443): Max retries exceeded with url: /drf/entry/2365060 (Caused by NewConnectionError('<requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f9b6dcf1e50>: Failed to establish a new connection: [Errno 110] Connection timed out',))
 ```
-3.
+3. 
 ```
 No JSON object could be decoded
 ```
