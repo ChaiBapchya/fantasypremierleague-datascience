@@ -165,9 +165,65 @@ File "user.py", line 36, in <module>
     `` 
 ```
 
+Issue #10
+=========
+No JSON object could be decoded
+```
+Traceback (most recent call last):
+  File "gw_player_python.py", line 37, in <module>
+    json_data = json.loads(response.text)
+  File "/usr/lib64/python2.7/json/__init__.py", line 339, in loads
+    return _default_decoder.decode(s)
+  File "/usr/lib64/python2.7/json/decoder.py", line 364, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/usr/lib64/python2.7/json/decoder.py", line 382, in raw_decode
+    raise ValueError("No JSON object could be decoded")
+ValueError: No JSON object could be decoded
+```
+Handled using exceptions
 
+Issue #11
+=========
+```
+Traceback (most recent call last):
+File "gw_player_python.py", line 20, in <module>
+response = requests.get("https://fantasy.premierleague.com/drf/entry/"+str(main_user_id)+"/event/"+str(gameweek)+"/picks")
+File "/usr/lib/python2.7/dist-packages/requests/api.py", line 55, in get
+return request('get', url, kwargs)
+File "/usr/lib/python2.7/dist-packages/requests/api.py", line 44, in request
+return session.request(method=method, url=url, kwargs)
+File "/usr/lib/python2.7/dist-packages/requests/sessions.py", line 335, in request
+resp = self.send(prep, send_kwargs)
+File "/usr/lib/python2.7/dist-packages/requests/sessions.py", line 438, in send
+r = adapter.send(request, kwargs)
+File "/usr/lib/python2.7/dist-packages/requests/adapters.py", line 327, in send
+raise ConnectionError(e)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='fantasy.premierleague.com', port=443): Max retries exceeded with url: /drf/entry/197156/event/1/picks (Caused by <class 'socket.error'>: [Errno 104] Connection reset by peer)
+```
+Solution:
+Check for the response and if it returns in any error - query after 5 sec sleep
+```
+response=''
+        while response == '':
+                try:
+                        #url="10.0.0.0"
+                        url="https://fantasy.premierleague.com/drf/entry/"+str(main_user_id)+"/event/"+str(gameweek)+"/picks"
+                        response = requests.get(url)
+                except:
+                        print "Connection refused"
+                        time.sleep(5)
+                        continue
+        player_data_per_gw.append(main_user_id)
+        if(response.status_code!=200):
+                print "na"
+                player_data_per_gw.append("empty")
+        else:
+                print "200"
+                json_data = json.loads(response.text)
 
-#Steps for Mongo Installation, Setup, Start, Use
+```
+
+# Steps for Mongo Installation, Setup, Start, Use
 1. 
 ```
 dnf install mongodb mongodb-server
@@ -204,7 +260,7 @@ fpl_user_data
 ```
 
 
-Issue #10
+Issue #12
 =========
 ```
 mongoimport -d fpl_users -c fpl_user_data --type csv --file data.csv --headerline
@@ -239,7 +295,7 @@ All CSV files imported similarly
 db.fpl_user_data.find().pretty()
 ```
 
-Issue #11
+Issue #13
 =========
 
 - Problem - 
@@ -262,7 +318,7 @@ db.adminCommand({"setParameter":1,"internalQueryExecMaxBlockingSortBytes":134217
 > db.fpl_user_data.find().sort({KEY:1})
 ```
 
-Issue #12
+Issue #14
 =========
 ```
 db.fpl_user_data.find().sort({KEY:"main_user_id"})
@@ -283,20 +339,20 @@ db.collection_name.find().sort({key:1}).pretty()
 db.fpl_user_data.find().sort( { main_user_id: 1 } ).pretty()
 ```
 
-Issue #13
+Issue #15
 =========
 - Problem - Accesing MongoDB using Python
 
 https://docs.mongodb.com/getting-started/python/client/
 https://docs.mongodb.com/getting-started/python/query/
 
-Issue #14
+Issue #16
 =========
 - Aggregation
 
 https://docs.mongodb.com/getting-started/python/aggregation/
 
-Issue #15
+Issue #17
 =========
 
 - Data inconsistency
@@ -323,7 +379,7 @@ empty data fields (ASCII Unicode)
 - key = attribute name / field / column name
 - value = corresponding value
 
-Issue #16
+Issue #18
 =========
 - Trying to Improve the Speed / Rate of Requests from 1 request per second to 10 or more
 - Tried Python libraries
