@@ -1,5 +1,5 @@
 # Steps for Mongo Installation, Setup, Start, Use
-1. 
+1. Installation
 ```
 dnf install mongodb mongodb-server
 ```
@@ -18,11 +18,11 @@ In order to use, `mongo-import`, install following -
 dnf install mongo-tools
 ```
 
-2. 
+2. Start
 ```
 systemctl start mongod
 ```
-3. 
+3. Use
 ```
 [root@chai chai]# mongo
 MongoDB shell version: 3.2.8
@@ -39,6 +39,7 @@ show collections
 fpl_user_data
 ```
 4. Mongo-import
+
 Absolute path - data.csv
 ```
 mongoimport -d fpl_users -c fpl_user_data --type csv --file data.csv --headerline
