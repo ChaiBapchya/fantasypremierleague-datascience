@@ -30,7 +30,7 @@ Hence despite the format was in JSON, Errors like
 
 Hence use other library that treats Request - Response as Json 
 
-Issue #2
+Issue #1
 ========
 ```
 names.append(full_name.str())
@@ -165,24 +165,7 @@ File "user.py", line 36, in <module>
     `` 
 ```
 
-Issue #10
-=========
-No JSON object could be decoded
-```
-Traceback (most recent call last):
-  File "gw_player_python.py", line 37, in <module>
-    json_data = json.loads(response.text)
-  File "/usr/lib64/python2.7/json/__init__.py", line 339, in loads
-    return _default_decoder.decode(s)
-  File "/usr/lib64/python2.7/json/decoder.py", line 364, in decode
-    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
-  File "/usr/lib64/python2.7/json/decoder.py", line 382, in raw_decode
-    raise ValueError("No JSON object could be decoded")
-ValueError: No JSON object could be decoded
-```
-Handled using exceptions
-
-Issue #11
+Issue #1
 =========
 ```
 Traceback (most recent call last):
