@@ -1,4 +1,5 @@
-1. Ins
+1. Inspect element issue
+========================
 
 While checking the source of any webpage - Directly Inspect element of Value visible on Webpage isnt always helpful
 
@@ -29,8 +30,8 @@ Hence despite the format was in JSON, Errors like
 
 Hence use other library that treats Request - Response as Json 
 
-Issue #1
-========
+2. Attribute error
+==================
 ```
 names.append(full_name.str())
 AttributeError: 'unicode' object has no attribute 'str'
@@ -40,8 +41,8 @@ Solution -
 str(full_name)
 ```
 
-Issue #3
-========
+3. Unicode Encode Error
+=======================
 ```
 names.append(str(full_name))
 UnicodeEncodeError: 'ascii' codec can't encode character u'\xe9' in position 1: ordinal not in range(128)
@@ -53,8 +54,8 @@ s = full_name.encode('ascii', 'ignore').decode('ascii')
 Disadv - removes all other internationalizations
 
 
-Issue #4
-========
+4. Unicode - String
+===================
 
 ```
 ', u'ElliotEmbleton', u'DeclanRice']
@@ -65,8 +66,8 @@ Convert Unicode string to normal ascii string
 str(variable)
 ```
 
-Issue #5
-========
+5. Type error
+=============
 ```
 response = requests.get("https://fantasy.premierleague.com/drf/entry/"+main_user_id+"/event/"+gameweek+"/picks")
 TypeError: cannot concatenate 'str' and 'int' objects
@@ -76,8 +77,8 @@ Solution
 str(main_user_id)
 ```
 
-Issue #6
-========
+6. Name error
+=============
 ```
 if player["is_captain"]==true:
 NameError: name 'true' is not defined
@@ -90,8 +91,8 @@ Solution
 if player["is_captain"]:
 ```
 
-Issue #7
-========
+7. Type Error - NoneType
+========================
 ```
 TypeError: 'NoneType' object has no attribute '__getitem__'
 ```
@@ -111,8 +112,8 @@ Here actual Sessions, parameters, tokens were passed
 
 
 
-Issue #8
-========
+8. Value Error
+==============
 ```
 Traceback (most recent call last):
   File "user.py", line 23, in <module>
@@ -130,8 +131,8 @@ ValueError: No JSON object could be decoded
  Handle the exception (basically bad request)
 
 
-Issue #9
-========
+9. URL issue
+============
 ```
 File "user.py", line 36, in <module>
     response = requests.get("https://fantasy.premierleague.com/drf/entry/"+str(counter))
@@ -164,8 +165,8 @@ File "user.py", line 36, in <module>
     `` 
 ```
 
-Issue #1
-=========
+10. Connection Error
+====================
 ```
 Traceback (most recent call last):
 File "gw_player_python.py", line 20, in <module>
@@ -242,8 +243,8 @@ fpl_user_data
 ```
 
 
-Issue #12
-=========
+11. Package error
+=================
 ```
 mongoimport -d fpl_users -c fpl_user_data --type csv --file data.csv --headerline
 bash: mongoimport: command not found...
@@ -277,8 +278,8 @@ All CSV files imported similarly
 db.fpl_user_data.find().pretty()
 ```
 
-Issue #13
-=========
+12. Operation failed
+====================
 
 - Problem - 
  ```
