@@ -1,5 +1,4 @@
-1. Inspect element issue
-========================
+# 1. Inspect element issue
 
 While checking the source of any webpage - Directly Inspect element of Value visible on Webpage isnt always helpful
 
@@ -30,8 +29,7 @@ Hence despite the format was in JSON, Errors like
 
 Hence use other library that treats Request - Response as Json 
 
-2. Attribute error
-==================
+# 1. Attribute error
 ```
 names.append(full_name.str())
 AttributeError: 'unicode' object has no attribute 'str'
@@ -41,8 +39,7 @@ Solution -
 str(full_name)
 ```
 
-3. Unicode Encode Error
-=======================
+# 3. Unicode Encode Error
 ```
 names.append(str(full_name))
 UnicodeEncodeError: 'ascii' codec can't encode character u'\xe9' in position 1: ordinal not in range(128)
@@ -54,9 +51,7 @@ s = full_name.encode('ascii', 'ignore').decode('ascii')
 Disadv - removes all other internationalizations
 
 
-4. Unicode - String
-===================
-
+# 4. Unicode - String
 ```
 ', u'ElliotEmbleton', u'DeclanRice']
 ```
@@ -66,8 +61,7 @@ Convert Unicode string to normal ascii string
 str(variable)
 ```
 
-5. Type error
-=============
+# 5. Type error
 ```
 response = requests.get("https://fantasy.premierleague.com/drf/entry/"+main_user_id+"/event/"+gameweek+"/picks")
 TypeError: cannot concatenate 'str' and 'int' objects
@@ -77,8 +71,7 @@ Solution
 str(main_user_id)
 ```
 
-6. Name error
-=============
+# 6. Name error
 ```
 if player["is_captain"]==true:
 NameError: name 'true' is not defined
@@ -91,8 +84,7 @@ Solution
 if player["is_captain"]:
 ```
 
-7. Type Error - NoneType
-========================
+# 7. Type Error - NoneType
 ```
 TypeError: 'NoneType' object has no attribute '__getitem__'
 ```
@@ -112,8 +104,7 @@ Here actual Sessions, parameters, tokens were passed
 
 
 
-8. Value Error
-==============
+# 8. Value Error
 ```
 Traceback (most recent call last):
   File "user.py", line 23, in <module>
@@ -131,8 +122,7 @@ ValueError: No JSON object could be decoded
  Handle the exception (basically bad request)
 
 
-9. URL issue
-============
+# 9. URL issue
 ```
 File "user.py", line 36, in <module>
     response = requests.get("https://fantasy.premierleague.com/drf/entry/"+str(counter))
