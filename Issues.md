@@ -1,5 +1,4 @@
-Issue #1
-========
+1. Ins
 
 While checking the source of any webpage - Directly Inspect element of Value visible on Webpage isnt always helpful
 
